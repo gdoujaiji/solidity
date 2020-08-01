@@ -12,7 +12,7 @@ contract People{
         bool senior;
     }
     
-    address public owner; // put public only to retreive address for testing otherwise remove it 
+    address public owner; // put public only to retrieve address for testing otherwise remove it 
     
     
     // constructor is a function run whenever the contract is created one time only
@@ -72,7 +72,7 @@ contract People{
     
     // function to get the addresses
     function getCreatorAddress(uint index) public view returns(address){
-        require(msg.sender == owner, "Caller needs to be owner"); // restrist access only to owner
+        require(msg.sender == owner, "Caller needs to be owner"); // restrict access only to owner
         return creators[index];
     }
 

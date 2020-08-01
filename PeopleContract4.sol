@@ -12,8 +12,20 @@ contract People{
         bool senior;
     }
     
+    // "data locations" is where we tell solidity to save the data
+    // there are three different "data locations"
+    // 1. storage: everything that is saved permanently; it is available as long as the contract lives
+    // 2. memory: only saved during function execution
+    // 3. stack: holds local variables of value types. e.g. uint bool. also gets deleted when function is done executions
+    
+    // following is an example of storage data locations
     address public owner; // put public only to retreive address for testing otherwise remove it 
     
+    // modifier function is used instead of a repeatitive code in some other functions
+    modifier onlyOwner(){
+        require(msg.sender == owner);
+        _; // this will tell solidity that the modifier is done and to continue the execution
+    }
     
     // constructor is a function run whenever the contract is created one time only
     // it needs to be public
@@ -23,8 +35,10 @@ contract People{
         owner = msg.sender; // msg.sender in the constructor will be the person that initiated the contract creation
     }
 
+     // following is an example of storage data locations
     mapping(address => Person) private people; // mapping is a key value system that can not be looped
     
+     // following is an example of storage data locations
     address[] private creators; // this array to save the addresses; so that the owner can know the address he wants to delete
 
     function createPerson(string memory name, uint age, uint height) public {
@@ -72,8 +86,8 @@ contract People{
     }
     
     // function delete Person
-    function deletePerson(address creator) public {
-        require(msg.sender == owner); // to make sure that only the owner can make delete operation
+    function deletePerson(address creator) public onlyOwner {
+        //require(msg.sender == owner); // to make sure that only the owner can make delete operation
         delete people[creator]; // that will delete the key from the mapping
         // another example for using assert function after deleting the struct from the mapping
         // no need to hash because we are comparing integers
@@ -82,8 +96,8 @@ contract People{
     }
     
     // function to get the addresses
-    function getCreatorAddress(uint index) public view returns(address){
-        require(msg.sender == owner, "Caller needs to be owner"); // restrist access only to owner
+    function getCreatorAddress(uint index) public view onlyOwner returns(address){
+        //require(msg.sender == owner, "Caller needs to be owner"); // restrist access only to owner
         return creators[index];
     }
 

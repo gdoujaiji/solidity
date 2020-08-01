@@ -14,6 +14,7 @@ contract People{
 
      // events in solidity is like notifications in web and mobile applications
     event personCreated(string name, bool senior);
+    event personDeleted(string name, bool senior, address deletedBy);
     
     // "data locations" is where we tell solidity to save the data
     // there are three different "data locations"
@@ -92,12 +93,15 @@ contract People{
     
     // function delete Person
     function deletePerson(address creator) public onlyOwner {
+        string memory name = people[creator].name;
+        bool senior = people[creator].senior;
         //require(msg.sender == owner); // to make sure that only the owner can make delete operation
         delete people[creator]; // that will delete the key from the mapping
         // another example for using assert function after deleting the struct from the mapping
         // no need to hash because we are comparing integers
         //assert(people[creator].age == 10); // assert will fire an error
        assert(people[creator].age == 0); // assert will not fire an error
+       emit personDeleted(name, senior, msg.sender);
     }
     
     // function to get the addresses

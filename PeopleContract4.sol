@@ -11,6 +11,9 @@ contract People{
         uint height;
         bool senior;
     }
+
+     // events in solidity is like notifications in web and mobile applications
+    event personCreated(string name, bool senior);
     
     // "data locations" is where we tell solidity to save the data
     // there are three different "data locations"
@@ -70,6 +73,8 @@ contract People{
         // assert function will fire only if there is error in our code
         assert(keccak256(abi.encodePacked(people[msg.sender].name, people[msg.sender].age, people[msg.sender].height, people[msg.sender].senior)) == keccak256(abi.encodePacked(newPerson.name, newPerson.age, newPerson.height, newPerson.senior)));
 
+        // we use the event defined in order to notify that new senior person is created
+        emit personCreated(newPerson.name, newPerson.senior);
     }
     
 

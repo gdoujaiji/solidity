@@ -24,7 +24,7 @@ contract People is Ownable, Destroyable{
     mapping(address => Person) private people;
     address[] private creators;
 
-    function createPerson(string memory name, uint age, uint height) public payable costs(1 ether) {
+    function createPerson(string memory name, uint age, uint height) public payable costs(100 wei) {
 
         require(age < 130, "Age needs to be below 130");
         balance += msg.value;

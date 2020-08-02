@@ -3,6 +3,7 @@ pragma solidity 0.5.12;
 
 contract Destroyable is Ownable{
     function destroy() public onlyOwner{
-        selfdestruct(msg.sender);
+        address payable receiver = msd.sender;
+        selfdestruct(receiver);
     }
 }

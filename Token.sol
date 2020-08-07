@@ -1,5 +1,6 @@
 pragma solidity 0.5.12;
 import "./Ownable.sol";
+import "./SafeMath.sol";
 
 contract ERC20 is Ownable {
     using SafeMath for uint256;
@@ -53,8 +54,8 @@ contract ERC20 is Ownable {
 
         //_totalSupply = _totalSupply.add(amount);
         //_balances[account] = _balances[account].add(amount);
-        _totalSupply = _totalSupply + amount;
-        _balances[account] = _balances[account] + amount;
+        _totalSupply = _totalSupply + add(amount);
+        _balances[account] = _balances[account] + add(amount);
         //emit Transfer(address(0), account, amount);
     }
 
@@ -63,8 +64,8 @@ contract ERC20 is Ownable {
         //require(msg.sender != address(0), "transfer from the zero address");
         require(reipient != address(0), "transfer to the zero address");
         require(_balances[msg.sender] >= amount, "Insufficient balance");
-        _balances[msg.sender] = _balances[msg.sender] - amount;
-        _balances[recipient] = _balances[recipient] + amount;
+        _balances[msg.sender] = _balances[msg.sender] - sub(amount);
+        _balances[recipient] = _balances[recipient] + add(amount);
         return true;
     }
 }

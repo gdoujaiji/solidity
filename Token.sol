@@ -3,7 +3,7 @@ import "./Ownable.sol";
 
 contract ERC20 is Ownable {
     using SafeMath for uint256;
-    using Address for address;
+    //using Address for address;
     
     string private _name;
     string private _symbol;

@@ -1,7 +1,7 @@
 pragma solidity 0.5.12;
 import "./Ownable.sol";
 import "./SafeMath.sol";
-
+// Checks - Effects - Interactions
 contract ERC20 is Ownable {
     using SafeMath for uint256;
     //using Address for address;

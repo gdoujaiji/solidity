@@ -62,7 +62,7 @@ contract ERC20 is Ownable {
     function transfer(address _to, uint256 _value) public override returns (bool success){
         //_transfer(_msgSender(), recipient, amount);//////
         //require(msg.sender != address(0), "transfer from the zero address");
-        require(reipient != address(0), "transfer to the zero address");
+        require(recipient != address(0), "transfer to the zero address");
         require(_balances[msg.sender] >= amount, "Insufficient balance");
         _balances[msg.sender] = _balances[msg.sender].sub(amount);
         _balances[recipient] = _balances[recipient].add(amount);
